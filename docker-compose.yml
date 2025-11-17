@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # CLI service
+  pentest-cli:
+    build: .
+    container_name: pentest-framework-cli
+    volumes:
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./sessions:/app/sessions
+      - ./configs:/app/configs
+    environment:
+      - PYTHONUNBUFFERED=1
+    network_mode: host
+    command: python main.py scan --help
+
+  # Web interface service
+  pentest-web:
+    build: .
+    container_name: pentest-framework-web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./sessions:/app/sessions
+      - ./configs:/app/configs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python web/app.py
+    restart: unless-stopped
+
+volumes:
+  output:
+  logs:
+  sessions:

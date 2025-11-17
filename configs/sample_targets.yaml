@@ -1,0 +1,54 @@
+# Sample target configuration file
+# This file defines targets to scan and framework settings
+
+# Scan mode: safe, normal, aggressive, stealth
+scan_mode: normal
+
+# Target definitions
+targets:
+  # Web application target
+  - name: example_webapp
+    type: url
+    value: http://example.com
+    priority: 8
+    tags:
+      - web
+      - production
+
+  # Network host target
+  - name: example_server
+    type: host
+    value: 192.168.1.100
+    priority: 7
+    ports:
+      - 22
+      - 80
+      - 443
+      - 3306
+      - 8080
+    tags:
+      - server
+      - internal
+
+  # Another web target
+  - name: test_site
+    type: url
+    value: https://testsite.example.com
+    priority: 5
+    tags:
+      - web
+      - staging
+
+# Plugin configuration
+# enabled_plugins: []  # If specified, only these plugins will run
+# disabled_plugins: []  # These plugins will be skipped
+
+# General settings
+max_threads: 10
+output_dir: output
+
+# User agent for web requests
+user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+# HTTP proxy (optional)
+# proxy: http://127.0.0.1:8080
